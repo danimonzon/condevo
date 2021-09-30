@@ -2,7 +2,7 @@
 % Please edit documentation in R/devo_ymd_hms.R
 \name{devo_ymd_hms}
 \alias{devo_ymd_hms}
-\title{Peticion a Devo en formato dmy_hms}
+\title{Peticion a Devo en formato ymd_hms}
 \usage{
 devo_ymd_hms(date_from, date_to, query, bearer)
 }

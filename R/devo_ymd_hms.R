@@ -1,5 +1,5 @@
 #' @import lubridate
-#' @title Peticion a Devo en formato dmy_hms
+#' @title Peticion a Devo en formato ymd_hms
 #' @description Peticion de datos a Devo, en un intervalo de tiempo definido ymd_hms
 #' @param date_from Fecha inicio en ymd_hms ("2021-01-01 10:00:00")
 #' @param date_to Fecha fin en ymd_hms ("2021-01-01 15:00:00")
