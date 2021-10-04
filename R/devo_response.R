@@ -2,6 +2,7 @@
 #' @import httr
 #' @import vroom
 #' @import stringr
+#' @import lubridate
 #' @title Peticion a Devo en formato epoch
 #' @description Peticion de datos a Devo, en un intervalo de tiempo definido en Epoch
 #' @param date_from Fecha inicio en epochtime
@@ -20,6 +21,7 @@ devo_response <- function(date_from, date_to, query, bearer){
     body = stringr::str_c('{', '"from":',date_from, ',"to":', date_to, ',"mode":{"type":"',"csv",'"}',',"query":"', query, '"}'),
     httr::add_headers('Authorization' = stringr::str_c('Bearer ', bearer))
   )
-  vroom::vroom(rawToChar(response$content), show_col_types = FALSE)
+  vroom::vroom(rawToChar(response$content), show_col_types = FALSE) %>%
+    mutate(eventdate = with_tz(eventdate, tzone = "CET"))
 }
 
