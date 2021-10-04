@@ -22,6 +22,6 @@ devo_response <- function(date_from, date_to, query, bearer){
     httr::add_headers('Authorization' = stringr::str_c('Bearer ', bearer))
   )
   vroom::vroom(rawToChar(response$content), show_col_types = FALSE) %>%
-    mutate(eventdate = with_tz(eventdate, tzone = "CET"))
+    mutate(eventdate = lubridate::with_tz(eventdate, tzone = "CET"))
 }
 
