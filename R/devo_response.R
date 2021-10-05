@@ -21,7 +21,15 @@ devo_response <- function(date_from, date_to, query, bearer){
     body = stringr::str_c('{', '"from":',date_from, ',"to":', date_to, ',"mode":{"type":"',"csv",'"}',',"query":"', query, '"}'),
     httr::add_headers('Authorization' = stringr::str_c('Bearer ', bearer))
   )
-  vroom::vroom(rawToChar(response$content), show_col_types = FALSE)
-    #mutate(eventdate = lubridate::with_tz(eventdate, tzone = "CET"))
-}
+  tib <- vroom::vroom(rawToChar(response$content), show_col_types = FALSE)
 
+  hay_eventdate <- sum(stringr::str_detect(names(tib), "eventdate"))
+
+  if(hay_eventdate>=1)
+    {resultado <- dplyr::mutate(tib, eventdate = lubridate::with_tz(eventdate, tzone = "CET"))}
+  else
+    {resultado <- tib}
+
+  return(resultado)
+
+}
