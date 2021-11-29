@@ -15,7 +15,7 @@
 devo_response <- function(date_from, date_to, query, bearer){
   query <- devo_adaptar_query(query)
   response <- httr::POST(
-    url = "https://apiv2-sasr.devo.com/search/query",
+    url = "https://apiv2-es.devo.com/search/query",
     httr::content_type('application/json'),
     encode = "json",
     body = stringr::str_c('{', '"from":',date_from, ',"to":', date_to, ',"mode":{"type":"',"csv",'"}',',"query":"', query, '"}'),
